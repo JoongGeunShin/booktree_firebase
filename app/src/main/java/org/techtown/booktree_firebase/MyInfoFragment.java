@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -96,6 +97,7 @@ public class MyInfoFragment extends Fragment {
                     break;
                 case R.id.myTree:
                     startMyTreeActivity();
+                    break;
             }
         }
     };
@@ -106,7 +108,7 @@ public class MyInfoFragment extends Fragment {
         startActivity(intent);
     }
     private  void startMyTreeActivity(){
-        Intent intent=new Intent(getContext(), MyTreeFragment.class);
+        Intent intent=new Intent(getContext(), MyTreeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
