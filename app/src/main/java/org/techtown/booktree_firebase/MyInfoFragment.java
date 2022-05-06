@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MyInfoFragment extends Fragment {
+    TextView nameTextView;
+
     private static final String TAG = "fragmentMyInfo";
 
 
@@ -54,7 +56,7 @@ public class MyInfoFragment extends Fragment {
         view.findViewById(R.id.myTree).setOnClickListener(onClickListener);
 
 
-        final TextView nameTextView = view.findViewById(R.id.nameText);
+        nameTextView = view.findViewById(R.id.nameText);
         final TextView phoneNumberTextView = view.findViewById(R.id.phoneNumberText);
         final TextView genderTextView = view.findViewById(R.id.genderText);
         final TextView emailTextView = view.findViewById(R.id.emailText);
@@ -110,6 +112,7 @@ public class MyInfoFragment extends Fragment {
     private  void startMyTreeActivity(){
         Intent intent=new Intent(getContext(), MyTreeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("username",nameTextView.getText().toString());
         startActivity(intent);
     }
 

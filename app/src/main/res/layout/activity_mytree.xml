@@ -25,7 +25,7 @@
         android:src="@drawable/tree" />
 
     <!-- 상위 이미지 버튼 4개 -->
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment1"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -34,7 +34,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="135dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment2"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -43,7 +43,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginTop="135dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment3"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -52,7 +52,7 @@
         android:layout_marginTop="135dp"
         android:layout_marginEnd="146dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment4"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -62,7 +62,7 @@
         android:layout_marginEnd="67dp" />
 
     <!-- 하위 이미지 버튼 5개-->
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment5"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -71,7 +71,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="225dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment6"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -80,7 +80,7 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="225dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment7"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -88,7 +88,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="225dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment8"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -97,7 +97,7 @@
         android:layout_marginTop="225dp"
         android:layout_marginEnd="102dp" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ownerment9"
         android:layout_width="50dp"
         android:layout_height="50dp"

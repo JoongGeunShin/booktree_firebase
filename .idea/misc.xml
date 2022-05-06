@@ -15,7 +15,7 @@
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_login.xml" value="0.34057971014492755" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_main.xml" value="0.24456521739130435" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_memeber_init.xml" value="0.34057971014492755" />
-        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_mytree.xml" value="0.1911231884057971" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_mytree.xml" value="0.18" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_password_reset.xml" value="0.34057971014492755" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_post_detail.xml" value="0.20244565217391305" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_sign_up.xml" value="0.3120471014492754" />
@@ -35,6 +35,7 @@
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/menu/footer.xml" value="0.3692708333333333" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1275" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/xml/filepaths.xml" value="0.1" />
       </map>
     </option>
   </component>
