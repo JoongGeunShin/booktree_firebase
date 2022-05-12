@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -381,28 +382,71 @@ public class MyTreeActivity extends AppCompatActivity {
     }
 
     // 초기 저장된 데이터 있으면 가져오기
-    private void initTree(){
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://booktree-d3cc4.appspot.com/").child("WriteClassImage/" + cu + "user's/");
-        if(storageRef == null){
-            Toast.makeText(MyTreeActivity.this, "사용자의 저장된 이미지가 없어 빈 트리를 불러옵니다.", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(MyTreeActivity.this, "사용자의 트리를 불러옵니다.", Toast.LENGTH_SHORT).show();
-            for(int i = 1; i<10 ; i++){
-                if(storageRef.getPath().startsWith(cu + "user's/" + i)){
-                    clickedImageNum = i;
-                    switch (clickedImageNum){
-                        case 1 : ownerment1.setImageURI(photoURI); break;
-                        case 2 : ownerment2.setImageURI(photoURI); break;
-                        case 3 : ownerment3.setImageURI(photoURI); break;
-                        case 4 : ownerment4.setImageURI(photoURI); break;
-                        case 5 : ownerment5.setImageURI(photoURI); break;
-                        case 6 : ownerment6.setImageURI(photoURI); break;
-                        case 7 : ownerment7.setImageURI(photoURI); break;
-                        case 8 : ownerment8.setImageURI(photoURI); break;
-                        case 9 : ownerment9.setImageURI(photoURI); break;
+    private void initTree() {
+        clickedImageNum = 0;
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://booktree-d3cc4.appspot.com/");
+        for (int i = 1; i < 10; i++) {
+            clickedImageNum = i;
+            String filename = " user_" + cu + "_"  + clickedImageNum + "'st image";
+
+              storageRef.child("WriteClassImage/" + cu + "/" + filename + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    switch (clickedImageNum) {
+                        case 1 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment1);
+                            break;
+                        case 2 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment2);
+                            break;
+                        case 3 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment3);
+                            break;
+                        case 4 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment4);
+                            break;
+                        case 5 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment5);
+                            break;
+                        case 6 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment6);
+                            break;
+                        case 7 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment7);
+                            break;
+                        case 8 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment8);
+                            break;
+                        case 9 :
+                            Glide.with(getApplicationContext())
+                                    .load(uri)
+                                    .into(ownerment9);
+                            break;
                     }
+
                 }
-            }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),clickedImageNum + "번 glide 실패", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

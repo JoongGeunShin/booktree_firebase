@@ -7,21 +7,51 @@
     android:textAlignment="center"
     tools:context=".MyInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="My Information"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/tree"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/nameText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사용자명"
+            android:textColor="#c3fa62"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="님을"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="환영합니다!"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -74,24 +104,53 @@
             android:text="생년월일"
             android:textColor="#000000"
             android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/myTree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="#c3fa62"
             android:text="내 트리 보기"
             android:textColor="@color/black"
-            android:background="#00FF0000"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="#c3fa62"
             android:gravity="center"
-            android:text="로그아웃" />
+            android:text="로그아웃"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/userDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="#c3fa62"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="회원탈퇴"
+            android:textColor="#ff00"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

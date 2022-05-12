@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MyInfoFragment extends Fragment {
     TextView nameTextView;
+    TextView nameTextView2;
 
     private static final String TAG = "fragmentMyInfo";
 
@@ -61,6 +64,7 @@ public class MyInfoFragment extends Fragment {
         final TextView genderTextView = view.findViewById(R.id.genderText);
         final TextView emailTextView = view.findViewById(R.id.emailText);
         final TextView birthDayTextView = view.findViewById(R.id.birthdayText);
+        nameTextView2 = view.findViewById(R.id.nameText1);
 
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -77,6 +81,7 @@ public class MyInfoFragment extends Fragment {
                             genderTextView.setText(document.getData().get("gender").toString());
                             emailTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                             birthDayTextView.setText(document.getData().get("birthday").toString());
+                            nameTextView2.setText(document.getData().get("name").toString());
                         } else {
                             Log.e(TAG, "No such document");
                         }
@@ -97,8 +102,29 @@ public class MyInfoFragment extends Fragment {
                     FirebaseAuth.getInstance().signOut();
                     startMainActivity();
                     break;
+
                 case R.id.myTree:
                     startMyTreeActivity();
+                    break;
+
+                case R.id.userDeleteButton:
+                    FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                            .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error deleting document", e);
+                                }
+                            });
+                    FirebaseAuth.getInstance().getCurrentUser().delete();
+                    FirebaseAuth.getInstance().signOut();
+
+                    startMainActivity();
                     break;
             }
         }
