@@ -288,7 +288,7 @@ public class MyTreeActivity extends AppCompatActivity {
                 //카메라 촬영
                 try{
                     galleryAddPic();
-                    ownerment1.setImageURI(imgUri);
+                    //ownerment1.setImageURI(imgUri);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -307,7 +307,7 @@ public class MyTreeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         //DB에 등록
                         //1. 사진을 storage에 저장하고 그 url을 알아내야함..
-                        String filename = " user_" + cu + "_"  + clickedImageNum + "'st image";
+                        String filename = "user_" + cu + "_"  + clickedImageNum + "'st_image";
                         StorageReference storageRef = storage.getReferenceFromUrl("gs://booktree-d3cc4.appspot.com/").child("WriteClassImage/" + cu + "/" + filename );
                         UploadTask uploadTask;
                         Uri file = null;
@@ -384,71 +384,116 @@ public class MyTreeActivity extends AppCompatActivity {
     // 초기 저장된 데이터 있으면 가져오기
     private void initTree() {
         clickedImageNum = 0;
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://booktree-d3cc4.appspot.com/");
+        FirebaseStorage storage2 = FirebaseStorage.getInstance();
+        StorageReference storageRef2 = storage2.getReferenceFromUrl("gs://booktree-d3cc4.appspot.com/");
         for (int i = 1; i < 10; i++) {
             clickedImageNum = i;
-            String filename = " user_" + cu + "_"  + clickedImageNum + "'st image";
+            String filename = "user_" + cu + "_"  + clickedImageNum + "'st_image";
 
-              storageRef.child("WriteClassImage/" + cu + "/" + filename + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    switch (clickedImageNum) {
-                        case 1 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment1);
-                            break;
-                        case 2 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment2);
-                            break;
-                        case 3 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment3);
-                            break;
-                        case 4 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment4);
-                            break;
-                        case 5 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment5);
-                            break;
-                        case 6 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment6);
-                            break;
-                        case 7 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment7);
-                            break;
-                        case 8 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment8);
-                            break;
-                        case 9 :
-                            Glide.with(getApplicationContext())
-                                    .load(uri)
-                                    .into(ownerment9);
-                            break;
-                    }
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(),clickedImageNum + "번 glide 실패", Toast.LENGTH_SHORT).show();
-                }
-            });
+            switch (clickedImageNum) {
+                case 1:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment1);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 2:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment2);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 3:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment3);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 4:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment4);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 5:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment5);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 6:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment6);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 7:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment7);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 8:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment8);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+                case 9:
+                    storageRef2.child("WriteClassImage/" + cu + "/" + filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getApplicationContext()).load(uri).into(ownerment9);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}
+                    });
+                    break;
+            }
         }
     }
+
 }
 
 

@@ -12,12 +12,12 @@
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/drawable/green_round_button.xml" value="0.21" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/drawable/round_button.xml" value="0.179" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/drawable/stroke.xml" value="0.214" />
-        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_add_post_item.xml" value="0.2947916666666667" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_add_post_item.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_chat_chatting.xml" value="0.24456521739130435" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_main.xml" value="0.24456521739130435" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_memeber_init.xml" value="0.34057971014492755" />
-        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_mytree.xml" value="0.18" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_mytree.xml" value="0.1" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_password_reset.xml" value="0.34057971014492755" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_post_detail.xml" value="0.20244565217391305" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_sign_up.xml" value="0.3120471014492754" />
@@ -25,11 +25,11 @@
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/activity_transmission.xml" value="0.20244565217391305" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_chat_starter.xml" value="0.2572463768115942" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_home.xml" value="0.1838768115942029" />
-        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_myinfo.xml" value="0.3120471014492754" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_myinfo.xml" value="0.21364985163204747" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_myinfo2.xml" value="0.25" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_mytree.xml" value="0.16" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/fragment_transmission.xml" value="0.20244565217391305" />
-        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/item_applicant.xml" value="0.20244565217391305" />
+        <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/item_applicant.xml" value="0.5" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/my_chatbox.xml" value="0.14074074074074075" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/mytree_image_adapter.xml" value="0.20199275362318841" />
         <entry key="..\:/androidStudioTest/booktree_firebase/app/src/main/res/layout/mytree_image_item.xml" value="0.3182291666666667" />
