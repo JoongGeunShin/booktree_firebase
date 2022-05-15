@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     private static final String Tag = "MainActivity";
 
@@ -113,21 +113,17 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
 
                             for(QueryDocumentSnapshot document : task.getResult()) {
-                                String hour = document.getData().get("closeTime_hour").toString();
-                                String minute = document.getData().get("closeTime_minute").toString();
-                                String time = hour + minute;
+                                String book_genre = document.getData().get("book_genre").toString();
+                                String book_style = document.getData().get("book_style").toString();
+                                String time = book_genre + book_style;
 
                                 postInfo.add(new PostInfo(
                                         document.getData().get("postTitle").toString(),
                                         document.getData().get("postContent").toString(),
-                                        document.getData().get("meetingArea").toString(),
-                                        document.getData().get("closeTime_hour").toString(),
-                                        //document.getData().get("closeTime_minute").toString(),
+                                        document.getData().get("book_genre").toString(),
                                         time,
-                                        document.getData().get("maxPerson").toString(),
                                         document.getData().get("userId").toString()));
-                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
-                            }
+                                                            }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
                             postAdaptor = new PostAdaptor(getActivity(), postInfo);
                             mRecyclerView.setHasFixedSize(true);
@@ -141,52 +137,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 });
 
         return rootView;
-    }
-
-    @Override
-    public void onRefresh() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                db.collection("posts")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
-
-
-                                    for(QueryDocumentSnapshot document : task.getResult()) {
-                                        String hour = document.getData().get("closeTime_hour").toString();
-                                        String minute = document.getData().get("closeTime_minute").toString();
-                                        String time = hour + minute;
-
-                                        postInfo.add(new PostInfo(
-                                                document.getData().get("postTitle").toString(),
-                                                document.getData().get("postContent").toString(),
-                                                document.getData().get("meetingArea").toString(),
-                                                document.getData().get("closeTime_hour").toString(),
-                                                //document.getData().get("closeTime_minute").toString(),
-                                                time,
-                                                document.getData().get("maxPerson").toString(),
-                                                document.getData().get("userId").toString()));
-                                    }
-                                    mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
-                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
-                                    mRecyclerView.setHasFixedSize(true);
-                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                    postAdaptor.setPostlist(postInfo);
-                                    mRecyclerView.setAdapter(postAdaptor);
-                                }else{
-                                    Log.e("Error", "task Error!");
-                                }
-                            }
-                        });
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }, 500);
     }
 
     // 로그인으로 이동

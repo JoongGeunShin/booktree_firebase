@@ -7,7 +7,6 @@ public class PostItem implements Parcelable {
     String postTitle;
     String meetingArea;
     String closeTime;
-    String maxPerson;
     int postImg;
 
 
@@ -15,11 +14,10 @@ public class PostItem implements Parcelable {
     int postIdx;
 
 
-    public PostItem(String postTitle, String meetingArea, String closeTime, String maxPerson, int postIdx){
+    public PostItem(String postTitle, String meetingArea, String closeTime, int postIdx){
         this.postTitle = postTitle;
         this.meetingArea = meetingArea;
         this.closeTime = closeTime;
-        this.maxPerson = maxPerson;
         this.postIdx = postIdx;
 
     }
@@ -28,7 +26,6 @@ public class PostItem implements Parcelable {
         postTitle = in.readString();
         meetingArea = in.readString();
         closeTime = in.readString();
-        maxPerson = in.readString();
         postIdx = in.readInt();
     }
 
@@ -56,10 +53,6 @@ public class PostItem implements Parcelable {
         this.closeTime = closeTime;
     }
 
-    public void setMaxPerson(String maxPerson) {
-        this.maxPerson = maxPerson;
-    }
-
     public void setPostIdx(int postIdx) {
         this.postIdx = postIdx;
     }
@@ -84,9 +77,6 @@ public class PostItem implements Parcelable {
         return closeTime;
     }
 
-    public String getMaxPerson() {
-        return maxPerson;
-    }
 
     public int getPostIdx() {
         return postIdx;
@@ -102,7 +92,6 @@ public class PostItem implements Parcelable {
         parcel.writeString(postTitle);
         parcel.writeString(meetingArea);
         parcel.writeString(closeTime);
-        parcel.writeString(maxPerson);
         parcel.writeInt(postIdx);
     }
 }

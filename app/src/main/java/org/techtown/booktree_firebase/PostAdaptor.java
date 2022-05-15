@@ -2,7 +2,6 @@ package org.techtown.booktree_firebase;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,12 +31,9 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostAdaptor.ViewHolder holder, int position) {
-//        holder.onBind(postInfo.get(position));
         holder.postTitle.setText(postInfo.get(position).getPostTitle());
-        holder.meetingArea.setText(postInfo.get(position).getMeetingArea());
-        holder.closeTime.setText(postInfo.get(position).getCloseTime_hour());
-        holder.closeTime.setText(postInfo.get(position).getCloseTime_minute());
-        holder.maxPerson.setText(postInfo.get(position).getMaxPerson());
+        holder.book_info.setText(postInfo.get(position).getBook_genre());
+        holder.book_info.setText(postInfo.get(position).getBook_style());
     }
 
     public void setPostlist(ArrayList<PostInfo> list){
@@ -53,16 +49,14 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView postImg;
-        TextView postTitle, meetingArea, closeTime, maxPerson;
+        TextView postTitle, book_info;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             postImg = (ImageView) itemView.findViewById(R.id.post_img);
             postTitle = (TextView) itemView.findViewById(R.id.post_title);
-            meetingArea = (TextView) itemView.findViewById(R.id.meeting_area);
-            closeTime = (TextView) itemView.findViewById(R.id.close_time);
-            maxPerson = (TextView) itemView.findViewById(R.id.max_person);
+            book_info = (TextView) itemView.findViewById(R.id.book_info);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override

@@ -3,19 +3,15 @@ package org.techtown.booktree_firebase;
 public class PostInfo {
     private String postTitle;
     private String postContent;
-    private String meetingArea;
-    private String closeTime_hour;
-    private String closeTime_minute;
-    private String maxPerson;
+    private String book_genre;
+    private String book_style;
     private String userId;
 
-    public PostInfo(String postTitle, String postContent, String meetingArea, String closeTime_hour, String closeTime_minute, String maxPerson, String userId) {
+    public PostInfo(String postTitle, String postContent, String book_genre, String book_style, String userId) {
         this.postTitle = postTitle;
         this.postContent = postContent;
-        this.meetingArea = meetingArea;
-        this.closeTime_hour = closeTime_hour;
-        this.closeTime_minute = closeTime_minute;
-        this.maxPerson = maxPerson;
+        this.book_genre = book_genre;
+        this.book_style = book_style;
         this.userId = userId;
     }
 
@@ -34,38 +30,22 @@ public class PostInfo {
     public void setPostContent(String postContent) {
         this.postContent = postContent;
     }
+    
 
-    public String getMeetingArea() {
-        return meetingArea;
+    public String getBook_genre() {
+        return book_genre;
     }
 
-    public void setMeetingArea(String meetingArea) {
-        this.meetingArea = meetingArea;
+    public void setBook_genre(String book_genre) {
+        this.book_genre = book_genre;
     }
 
-    public String getCloseTime_hour() {
-        return closeTime_hour;
+    public String getBook_style() {
+        return book_style;
     }
 
-    public void setCloseTime_hour(String closeTime_hour) {
-        this.closeTime_hour = closeTime_hour;
-    }
-
-    public String getCloseTime_minute() {
-        return closeTime_minute;
-    }
-
-    public void setCloseTime_minute(String closeTime_minute) {
-        this.closeTime_minute = closeTime_minute;
-    }
-
-    public String getMaxPerson() {
-        return maxPerson;
-    }
-
-    public void setMaxPerson(String maxPerson) {
-        this.maxPerson = maxPerson;
-    }
+    public void setBook_style(String book_style) { this.book_style = book_style; }
+    
 
     public String getUserId() {
         return userId;

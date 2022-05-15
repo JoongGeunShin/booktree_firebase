@@ -23,7 +23,7 @@ public class AddPostItem extends AppCompatActivity {
 
     private FirebaseUser user;
     private Button btnClose;
-    private EditText postTitle,postContent, postMeetingArea, postCloseTime, postMaxPerson;
+    private EditText postTitle,postContent;
     private static String userId;
 
     @Override
@@ -31,23 +31,19 @@ public class AddPostItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post_item);
 
-        Spinner hourSpinner = (Spinner)findViewById(R.id.spinner_add_post_close_time_hour);
+        // 책 장르(로맨스, 소설..)
+        Spinner hourSpinner = (Spinner)findViewById(R.id.spinner_add_post_book_genre);
         ArrayAdapter hourAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_hour, android.R.layout.simple_spinner_item);
+                R.array.array_genre, android.R.layout.simple_spinner_item);
         hourAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hourSpinner.setAdapter(hourAdapter);
 
-        Spinner minuteSpinner = (Spinner)findViewById(R.id.spinner_add_post_close_time_minute);
+        // 책 스타일(베스트셀러, 최신 ...)
+        Spinner minuteSpinner = (Spinner)findViewById(R.id.spinner_add_post_book_style);
         ArrayAdapter minuteAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_minute, android.R.layout.simple_spinner_item);
+                R.array.array_style, android.R.layout.simple_spinner_item);
         minuteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         minuteSpinner.setAdapter(minuteAdapter);
-
-        Spinner personSpinner = (Spinner)findViewById(R.id.spinner_add_post_max_person);
-        ArrayAdapter personAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_person, android.R.layout.simple_spinner_item);
-        personAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        personSpinner.setAdapter(personAdapter);
 
         btnClose = (Button) findViewById(R.id.btn_close);
 
@@ -66,21 +62,17 @@ public class AddPostItem extends AppCompatActivity {
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
         String content = postTitle.getText().toString();
-        postMeetingArea = (EditText) findViewById(R.id.add_post_meeting_area);
-        String meetingArea = postMeetingArea.getText().toString();
 
-        Spinner hourS = (Spinner) findViewById(R.id.spinner_add_post_close_time_hour);
-        String closeTime_hour = hourS.getSelectedItem().toString();
+        Spinner genreS = (Spinner) findViewById(R.id.spinner_add_post_book_genre);
+        String book_genre = genreS.getSelectedItem().toString();
 
-        Spinner minuteS = (Spinner) findViewById(R.id.spinner_add_post_close_time_minute);
-        String closeTime_minute = minuteS.getSelectedItem().toString();
+        Spinner syleS = (Spinner) findViewById(R.id.spinner_add_post_book_style);
+        String book_style = syleS.getSelectedItem().toString();
 
-        Spinner personS = (Spinner) findViewById(R.id.spinner_add_post_max_person);
-        String maxPerson = personS.getSelectedItem().toString();
 
-        if(title.length()>0 && content.length()>0 && meetingArea.length()>0 && closeTime_hour.length()>0 && closeTime_minute.length()>0){
+        if(title.length()>0 && content.length()>0 && book_genre.length()>0 && book_style.length()>0){
             user = FirebaseAuth.getInstance().getCurrentUser();
-            PostInfo postInfo = new PostInfo(title, content, meetingArea, closeTime_hour, closeTime_minute, maxPerson, user.getProviderId());
+            PostInfo postInfo = new PostInfo(title, content, book_genre, book_style, user.getEmail());
             uploader(postInfo);
         }
     }

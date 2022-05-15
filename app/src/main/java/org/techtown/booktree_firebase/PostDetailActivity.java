@@ -10,19 +10,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PostDetailActivity extends AppCompatActivity {
 
-    TextView postDetail;
-    Button tmBtn;
+    String title, what, content;
+    TextView post_title, post_what, post_content;
+    TextView book_genre, book_style;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
 
-        postDetail = findViewById(R.id.post_info);
+        post_title = (TextView) findViewById(R.id.post_title);
+        post_what = (TextView) findViewById(R.id.post_what);
+        post_content = (TextView) findViewById(R.id.post_content);
 
-        tmBtn = findViewById(R.id.tmbtn);
+        book_genre = (TextView) findViewById(R.id.spinner_add_post_book_genre);
+        book_style = (TextView) findViewById(R.id.spinner_add_post_book_style);
 
-
+        Intent intent = getIntent();
 
     }
 

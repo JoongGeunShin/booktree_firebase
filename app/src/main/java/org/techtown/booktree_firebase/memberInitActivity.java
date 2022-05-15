@@ -42,11 +42,6 @@ public class memberInitActivity extends AppCompatActivity {
                 R.array.array_gender, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
-
-        ArrayAdapter accountAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_account, android.R.layout.simple_spinner_item);
-        accountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        findViewById(R.id.checkButton).setOnClickListener(onClickListener);
     }
 
     @Override public void onBackPressed() {
