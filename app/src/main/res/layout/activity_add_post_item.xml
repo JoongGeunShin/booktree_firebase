@@ -56,11 +56,11 @@
                 android:layout_height="wrap_content"
                 android:hint="제목" />
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/add_post_what"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="책 장르" />
+                android:hint="책 장르" />-->
 
             <EditText
                 android:id="@+id/add_post_content"

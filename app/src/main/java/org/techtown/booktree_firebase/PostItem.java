@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 public class PostItem implements Parcelable {
     String postTitle;
-    String meetingArea;
-    String closeTime;
+    String postWhat;
+    String bookInfo;
     int postImg;
 
 
@@ -14,18 +14,18 @@ public class PostItem implements Parcelable {
     int postIdx;
 
 
-    public PostItem(String postTitle, String meetingArea, String closeTime, int postIdx){
+    public PostItem(String postTitle, String postWhat, String bookInfo, int postIdx){
         this.postTitle = postTitle;
-        this.meetingArea = meetingArea;
-        this.closeTime = closeTime;
+        this.postWhat = postWhat;
+        this.bookInfo = bookInfo;
         this.postIdx = postIdx;
 
     }
 
     protected PostItem(Parcel in) {
         postTitle = in.readString();
-        meetingArea = in.readString();
-        closeTime = in.readString();
+        postWhat = in.readString();
+        bookInfo = in.readString();
         postIdx = in.readInt();
     }
 
@@ -45,12 +45,12 @@ public class PostItem implements Parcelable {
         this.postTitle = postTitle;
     }
 
-    public void setMeetingArea(String meetingArea) {
-        this.meetingArea = meetingArea;
+    public void setPostWhat(String postWhat) {
+        this.postWhat = postWhat;
     }
 
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
+    public void setBookInfo(String bookInfo) {
+        this.bookInfo = bookInfo;
     }
 
     public void setPostIdx(int postIdx) {
@@ -69,12 +69,12 @@ public class PostItem implements Parcelable {
         return postTitle;
     }
 
-    public String getMeetingArea() {
-        return meetingArea;
+    public String getPostWhat() {
+        return postWhat;
     }
 
-    public String getCloseTime() {
-        return closeTime;
+    public String getBookInfo() {
+        return bookInfo;
     }
 
 
@@ -90,8 +90,8 @@ public class PostItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(postTitle);
-        parcel.writeString(meetingArea);
-        parcel.writeString(closeTime);
+        parcel.writeString(postWhat);
+        parcel.writeString(bookInfo);
         parcel.writeInt(postIdx);
     }
 }

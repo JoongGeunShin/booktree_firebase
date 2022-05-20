@@ -62,9 +62,14 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
                 @Override
                 public void onClick(View view){
                     int pos = getAdapterPosition();
+//                    if(pos != RecyclerView.NO_POSITION){
+//                        Intent intent = new Intent(mContext, PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        intent.putExtra("pos", pos);
+//                        mContext.startActivity(intent);
+//                    }
                     if(pos != RecyclerView.NO_POSITION){
                         Intent intent = new Intent(mContext, PostDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                        intent.putExtra("KEY", postInfo.get(pos).getPostTitle());
                         mContext.startActivity(intent);
                     }
                 }

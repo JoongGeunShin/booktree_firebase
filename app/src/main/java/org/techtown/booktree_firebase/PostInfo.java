@@ -40,6 +40,7 @@ public class PostInfo {
         this.book_genre = book_genre;
     }
 
+
     public String getBook_style() {
         return book_style;
     }
@@ -51,7 +52,5 @@ public class PostInfo {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    public void setUserId(String userId) { this.userId = userId; }
 }

@@ -36,26 +36,37 @@
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/post_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:hint="제목" />
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:hint="제목" />
+
+                <TextView
+                    android:id="@+id/post_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textAlignment="center"
+                    android:hint="제목" />
+
+            </LinearLayout>
+
+
 
             <TextView
-                android:id="@+id/post_what"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="찾고 있습니다."
-                android:textStyle="italic"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/post_content"
+                android:id="@+id/post_detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:textSize="18sp"
                 android:gravity="top"
                 android:hint="내용을 입력하세요." />
 
@@ -73,17 +84,17 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/spinner_add_post_book_genre"
+                    android:id="@+id/post_detail_book_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:hint="장르"
+                    android:hint="장르_스타일"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:gravity="center"/>
 
                 <TextView
-                    android:id="@+id/spinner_add_post_book_style"
+                    android:id="@+id/post_detail__book_style"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_weight="1"

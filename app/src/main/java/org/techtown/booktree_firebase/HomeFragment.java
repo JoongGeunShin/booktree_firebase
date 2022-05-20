@@ -70,9 +70,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        //swipeRefreshLayout = rootView.findViewById(R.id.swipe_layout);
-        //swipeRefreshLayout.setOnRefreshListener(this);
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // 글쓰기 버튼
@@ -115,13 +112,12 @@ public class HomeFragment extends Fragment {
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 String book_genre = document.getData().get("book_genre").toString();
                                 String book_style = document.getData().get("book_style").toString();
-                                String time = book_genre + book_style;
 
                                 postInfo.add(new PostInfo(
                                         document.getData().get("postTitle").toString(),
                                         document.getData().get("postContent").toString(),
-                                        document.getData().get("book_genre").toString(),
-                                        time,
+                                        book_genre,
+                                        book_style,
                                         document.getData().get("userId").toString()));
                                                             }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);

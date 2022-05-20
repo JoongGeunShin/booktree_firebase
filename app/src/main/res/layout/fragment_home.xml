@@ -59,6 +59,7 @@
         android:background="@drawable/btn_add_post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="#c3fa62"
         android:layout_margin="30dp"
         />
 

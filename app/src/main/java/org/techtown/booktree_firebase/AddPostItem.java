@@ -12,19 +12,26 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddPostItem extends AppCompatActivity {
 
-    private FirebaseUser user;
+    private static final String TAG = "AddPostItemActivity";
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private Button btnClose;
+
+    // 입력 내용
     private EditText postTitle,postContent;
-    private static String userId;
+    private DocumentReference mDatabase;
+    private static String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,8 @@ public class AddPostItem extends AppCompatActivity {
 
 
     private void addPost(){
+
+        // 제목, 내용, 장르, 스타일일
         postTitle = (EditText) findViewById(R.id.add_post_title);
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
@@ -69,21 +78,23 @@ public class AddPostItem extends AppCompatActivity {
         Spinner syleS = (Spinner) findViewById(R.id.spinner_add_post_book_style);
         String book_style = syleS.getSelectedItem().toString();
 
+        userEmail = user.getEmail();
 
-        if(title.length()>0 && content.length()>0 && book_genre.length()>0 && book_style.length()>0){
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            PostInfo postInfo = new PostInfo(title, content, book_genre, book_style, user.getEmail());
-            uploader(postInfo);
-        }
+       if(title.length()>0 && content.length()>0 && book_genre.length()>0 && book_style.length()>0){
+           PostInfo postInfo = new PostInfo(title, content, book_genre, book_style, userEmail);
+           uploader(postInfo);
+       }
     }
 
     private void uploader(PostInfo postInfo){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-        db.collection("posts").add(postInfo)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("posts").document(postInfo.getPostTitle())
+                .set(postInfo)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void aVoid) {
                         Log.d("AddPost Activity", "DocumentSnapShot" + documentReference);
                     }
 
