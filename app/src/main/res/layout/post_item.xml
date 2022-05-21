@@ -71,10 +71,18 @@
 
                 <!--좋아요테스트-->
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="좋아요 개수 : "
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"/>
+
+                <TextView
                     android:id="@+id/likes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="좋아요 개수"
+                    android:text="개수"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:textStyle="bold"/>

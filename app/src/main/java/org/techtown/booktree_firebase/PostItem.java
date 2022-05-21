@@ -8,6 +8,7 @@ public class PostItem implements Parcelable {
     String postWhat;
     String bookInfo;
     int postImg;
+    int likescount;
 
 
 

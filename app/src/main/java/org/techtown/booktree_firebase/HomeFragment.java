@@ -29,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private FirebaseAuth mAuth;
     private static final String Tag = "MainActivity";
 
@@ -69,8 +69,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
-
+        viewGroup = rootView;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        swipeRefreshLayout =rootView.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         // 글쓰기 버튼
         btn_add = (AppCompatButton) rootView.findViewById(R.id.btn_add_post);
@@ -118,8 +121,9 @@ public class HomeFragment extends Fragment {
                                         document.getData().get("postContent").toString(),
                                         book_genre,
                                         book_style,
-                                        document.getData().get("userId").toString()));
-                                                            }
+                                        document.getData().get("userId").toString(),
+                                        (document.getData().get("likesCount").toString())));
+                            }
                             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.RecyclePostList);
                             postAdaptor = new PostAdaptor(getActivity(), postInfo);
                             mRecyclerView.setHasFixedSize(true);
@@ -134,6 +138,55 @@ public class HomeFragment extends Fragment {
 
         return rootView;
     }
+
+    @Override
+    public void onRefresh() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                db.collection("posts")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    ArrayList<PostInfo> postInfo = new ArrayList<>();
+
+
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                             {
+
+                                                String book_genre = document.getData().get("book_genre").toString();
+                                                String book_style = document.getData().get("book_style").toString();
+
+                                                postInfo.add(new PostInfo(
+                                                        document.getData().get("postTitle").toString(),
+                                                        document.getData().get("postContent").toString(),
+                                                        book_genre,
+                                                        book_style,
+                                                        document.getData().get("userId").toString(),
+                                                        (document.getData().get("likesCount").toString())));
+                                                //Log.d("closeTime 확인", document.getData().get("closeTime").toString());
+                                            }
+                                        }
+
+                                    mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.RecyclePostList);
+                                    postAdaptor = new PostAdaptor(getActivity(), postInfo);
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    postAdaptor.setPostlist(postInfo);
+                                    mRecyclerView.setAdapter(postAdaptor);
+                                }else{
+                                    Log.e("Error", "task Error!");
+                                }
+                            }
+                        });
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 500);
+    }
+
 
     // 로그인으로 이동
     private  void startLoginActivity(){

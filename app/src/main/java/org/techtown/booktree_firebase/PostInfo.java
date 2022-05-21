@@ -6,13 +6,15 @@ public class PostInfo {
     private String book_genre;
     private String book_style;
     private String userId;
+    private String likesCount;
 
-    public PostInfo(String postTitle, String postContent, String book_genre, String book_style, String userId) {
+    public PostInfo(String postTitle, String postContent, String book_genre, String book_style, String userId, String likesCount) {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.book_genre = book_genre;
         this.book_style = book_style;
         this.userId = userId;
+        this.likesCount = likesCount;
     }
 
     public String getPostTitle() {
@@ -53,4 +55,8 @@ public class PostInfo {
     }
 
     public void setUserId(String userId) { this.userId = userId; }
+
+    public String getLikesCount() {return likesCount; }
+
+    public void setLikesCount(String likesCount) { this.likesCount = likesCount; }
 }

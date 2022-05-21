@@ -70,7 +70,7 @@ public class AddPostItem extends AppCompatActivity {
         postTitle = (EditText) findViewById(R.id.add_post_title);
         String title = postTitle.getText().toString();
         postContent = (EditText) findViewById(R.id.add_post_content);
-        String content = postTitle.getText().toString();
+        String content = postContent.getText().toString();
 
         Spinner genreS = (Spinner) findViewById(R.id.spinner_add_post_book_genre);
         String book_genre = genreS.getSelectedItem().toString();
@@ -81,7 +81,7 @@ public class AddPostItem extends AppCompatActivity {
         userEmail = user.getEmail();
 
        if(title.length()>0 && content.length()>0 && book_genre.length()>0 && book_style.length()>0){
-           PostInfo postInfo = new PostInfo(title, content, book_genre, book_style, userEmail);
+           PostInfo postInfo = new PostInfo(title, content, book_genre, book_style, userEmail, "0");
            uploader(postInfo);
        }
     }
