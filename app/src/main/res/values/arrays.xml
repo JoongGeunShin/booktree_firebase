@@ -28,4 +28,10 @@
         <item>최신</item>
         <item>요즘 뜨는</item>
     </string-array>
+
+    <string-array name="search_type">
+        <item>사용자</item>
+        <item>게시글</item>
+    </string-array>
+
 </resources>
