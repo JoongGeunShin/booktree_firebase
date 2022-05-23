@@ -12,16 +12,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
 
     private ArrayList<PostInfo> postInfo;
     private Context mContext;
 
+    // search랑 연결위한 어댑터
+    private Context context;
+    private List<PostItem> list;
+    private LayoutInflater inflate;
+    private ViewHolder viewHolder;
+
     public PostAdaptor(Context context, ArrayList<PostInfo> list){
         this.mContext = context;
         this.postInfo = list;
     }
+
+    public PostAdaptor(List<PostItem> list, SearchActivity searchActivity) {
+    }
+
+    public PostAdaptor(List<PostItem> list, Context context){
+        this.list = list;
+        this.context = context;
+        this.inflate = LayoutInflater.from(context);
+    }
+
     @NonNull
     @Override
     public PostAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,6 +60,16 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    // get
+    public int getCount() {
+        return list.size();
+    }
+    public Object getItem(int i) {
+        return null;
+    }
+    public long getItemId(int i) {
+        return 0;
+    }
 
     @Override
     public int getItemCount() {
@@ -75,4 +102,6 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHolder> {
             });
         }
     }
+
+
 }
