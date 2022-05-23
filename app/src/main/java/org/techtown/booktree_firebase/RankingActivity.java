@@ -1,8 +1,11 @@
 package org.techtown.booktree_firebase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,10 @@ public class RankingActivity extends AppCompatActivity {
 
     private PostAdaptor postAdaptor;
 
+    ArrayList<PostInfo> postInfo = new ArrayList<>();
+
+    private String tempTitle[];
+    private String tempLikes[];
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -39,18 +46,119 @@ public class RankingActivity extends AppCompatActivity {
         UserRanking1 = (Button) findViewById(R.id.UserRanking1);
         UserRanking2 = (Button) findViewById(R.id.UserRanking2);
         UserRanking3 = (Button) findViewById(R.id.UserRanking3);
+
+        CalculatePostRank();
+
+        PostRanking1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempTitle = new String[postInfo.size()];
+                tempLikes = new String[postInfo.size()];
+
+                for(int i = 0; i < postInfo.size() ; i++){
+                    tempTitle[i] = postInfo.get(i).getPostTitle();
+                    tempLikes[i] = postInfo.get(i).getLikesCount();
+                }
+                // likes 배열도 만들어서 해보면 될듯
+                for(int i = 0;i < postInfo.size(); i++) {
+                    for(int j = i+1 ; j < postInfo.size() ; j++){
+
+                        if(Integer.parseInt(tempLikes[i]) < Integer.parseInt(tempLikes[j])){
+                            String temp_title = tempTitle[i];
+                            tempTitle[i] = tempTitle[j];
+                            tempTitle[j] = temp_title;
+                            String temp_likes = tempLikes[i];
+                            tempLikes[i] = tempLikes[j];
+                            tempLikes[j] = temp_likes;
+                        }
+                    }
+                }
+
+                Intent intent = new Intent(RankingActivity.this,PostDetailActivity.class);
+                intent.putExtra("KEY",tempTitle[0]);
+                intent.putExtra("postTitle",tempTitle[0]);
+//                Toast.makeText(RankingActivity.this, tempTitle[0], Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+        PostRanking2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempTitle = new String[postInfo.size()];
+                tempLikes = new String[postInfo.size()];
+
+                for(int i = 0; i < postInfo.size() ; i++){
+                    tempTitle[i] = postInfo.get(i).getPostTitle();
+                    tempLikes[i] = postInfo.get(i).getLikesCount();
+                }
+                // likes 배열도 만들어서 해보면 될듯
+                for(int i = 0;i < postInfo.size(); i++) {
+                    for(int j = i+1 ; j < postInfo.size() ; j++){
+
+                        if(Integer.parseInt(tempLikes[i]) < Integer.parseInt(tempLikes[j])){
+                            String temp_title = tempTitle[i];
+                            tempTitle[i] = tempTitle[j];
+                            tempTitle[j] = temp_title;
+                            String temp_likes = tempLikes[i];
+                            tempLikes[i] = tempLikes[j];
+                            tempLikes[j] = temp_likes;
+                        }
+                    }
+                }
+
+                Intent intent = new Intent(RankingActivity.this,PostDetailActivity.class);
+                intent.putExtra("KEY",tempTitle[1]);
+                intent.putExtra("postTitle",tempTitle[1]);
+//                Toast.makeText(RankingActivity.this, tempTitle[0], Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+        PostRanking3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempTitle = new String[postInfo.size()];
+                tempLikes = new String[postInfo.size()];
+
+                for(int i = 0; i < postInfo.size() ; i++){
+                    tempTitle[i] = postInfo.get(i).getPostTitle();
+                    tempLikes[i] = postInfo.get(i).getLikesCount();
+                }
+                // likes 배열도 만들어서 해보면 될듯
+                for(int i = 0;i < postInfo.size(); i++) {
+                    for(int j = i+1 ; j < postInfo.size() ; j++){
+
+                        if(Integer.parseInt(tempLikes[i]) < Integer.parseInt(tempLikes[j])){
+                            String temp_title = tempTitle[i];
+                            tempTitle[i] = tempTitle[j];
+                            tempTitle[j] = temp_title;
+                            String temp_likes = tempLikes[i];
+                            tempLikes[i] = tempLikes[j];
+                            tempLikes[j] = temp_likes;
+                        }
+                    }
+                }
+
+                Intent intent = new Intent(RankingActivity.this,PostDetailActivity.class);
+                intent.putExtra("KEY",tempTitle[2]);
+                intent.putExtra("postTitle",tempTitle[2]);
+//                Toast.makeText(RankingActivity.this, tempTitle[2], Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     private void CalculatePostRank() {
-        String FirstTitle = null, SecondTitle = null, ThirdTitle = null, tempTitle;
-        int FirstLikes = 3, SecondLikes = 2, ThirdLikes = 1, tempLikes;
-
         db.collection("posts")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<PostInfo> postInfo = new ArrayList<>();
+                    postInfo = new ArrayList<>();
 
 
                     for(QueryDocumentSnapshot document : task.getResult()) {
@@ -65,16 +173,12 @@ public class RankingActivity extends AppCompatActivity {
                                 document.getData().get("userId").toString(),
                                 (document.getData().get("likesCount").toString())));
                     }
-                    // 여기서 순위 정하기
-//                    if(tempLikes>ThirdLikes){
-//                        ThirdLikes = tempLikes;
-//                    }
-
+                    postAdaptor = new PostAdaptor(getApplicationContext(), postInfo);
                 }else{
                     Log.e("Error", "task Error!");
                 }
             }
         });
-
     }
+
 }

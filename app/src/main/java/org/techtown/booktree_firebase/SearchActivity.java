@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -32,9 +34,9 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PostAdaptor postAdaptor;
     private ArrayList<PostInfo> postInfo = new ArrayList<>();
+    // 게시글 데이터를 넣을 리스트
+    private ArrayList<PostInfo> postInfoInput = new ArrayList<>();
 
-    // 데이터를 넣을 리스트
-    private ArrayList<PostInfo> list = new ArrayList<>();
 
 
     // 파베 연동
@@ -42,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // spinner 변경시 리스트 변경위해
-    String search_type;
+    String[] search_types = {"게시글","사용자"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +53,19 @@ public class SearchActivity extends AppCompatActivity {
 
         // xml 리스너 설정
         Spinner typeSpinner = (Spinner)findViewById(R.id.spinner_search_type);
-        ArrayAdapter typeAdapter = ArrayAdapter.createFromResource(this,
-                R.array.search_type, android.R.layout.simple_spinner_item);
+//        ArrayAdapter typeAdapter = ArrayAdapter.createFromResource(this,
+//                R.array.search_type, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(
+                this,android.R.layout.simple_spinner_item,search_types
+        );
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
-        search_type = typeSpinner.getSelectedItem().toString();
+        //search_type = typeSpinner.getSelectedItem().toString();
         editSearch = (EditText) findViewById(R.id.editSearch);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecycleSearchPostList);
 
         // 검색에 사용할 데이터 전부 가져오기
-        settingPostList();
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
         editSearch.addTextChangedListener(new TextWatcher() {
@@ -80,14 +84,36 @@ public class SearchActivity extends AppCompatActivity {
                 search_post(text);
             }
         });
+
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(getApplicationContext(),search_types[i],Toast.LENGTH_SHORT).show();
+                if(search_types[i].equals("게시글")){
+                    postInfo.clear();
+                    settingPostList();
+                }else if(search_types[i].equals("사용자")){
+                    postInfoInput.clear();
+                    postAdaptor = new PostAdaptor(getApplicationContext(), postInfoInput);
+                    mRecyclerView.setAdapter(postAdaptor);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
+
 
 
     // 검색을 수행하는 메소드
     public void search_post(String charText) {
 
         // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
-        list.clear();
+        postInfoInput.clear();
 
 
         // 문자 입력이 없을때는 모든 데이터를 보여준다.
@@ -104,14 +130,14 @@ public class SearchActivity extends AppCompatActivity {
                 if (postInfo.get(i).getPostTitle().toLowerCase().contains(charText))
                 {
                     // 검색된 데이터를 리스트에 추가한다.
-                    list.add(postInfo.get(i));
+                    postInfoInput.add(postInfo.get(i));
                     Log.i("postinfo", postInfo.get(i).getPostTitle());
                     //postAdaptor = new PostAdaptor(getApplicationContext(), postInfo);
                 }
             }
         }
         // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
-        postAdaptor = new PostAdaptor(getApplicationContext(), list);
+        postAdaptor = new PostAdaptor(getApplicationContext(), postInfoInput);
         mRecyclerView.setAdapter(postAdaptor);
         postAdaptor.notifyDataSetChanged();
 
@@ -152,5 +178,8 @@ public class SearchActivity extends AppCompatActivity {
                 });
 
     }
+
+    // 여기서부터 사용자
+
 
 }
