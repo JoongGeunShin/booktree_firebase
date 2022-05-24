@@ -59,7 +59,7 @@ public class MyTreeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    final String cu = user.getUid();
+    private String cu;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -73,6 +73,9 @@ public class MyTreeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mytree);
+
+        Intent intent = getIntent();
+        cu = intent.getExtras().getString("useremail");
 
         ownerment1 = (ImageView)findViewById(R.id.ownerment1);
         ownerment2 = (ImageView)findViewById(R.id.ownerment2);

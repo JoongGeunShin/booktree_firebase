@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MyInfoFragment extends Fragment {
     TextView nameTextView;
     TextView nameTextView2;
-
+    FirebaseAuth user_;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private static final String TAG = "fragmentMyInfo";
 
 
@@ -138,7 +141,8 @@ public class MyInfoFragment extends Fragment {
     private  void startMyTreeActivity(){
         Intent intent=new Intent(getContext(), MyTreeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("username",nameTextView.getText().toString());
+        intent.putExtra("useremail",user.getEmail());
+//        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

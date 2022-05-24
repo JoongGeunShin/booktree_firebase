@@ -148,6 +148,39 @@ public class RankingActivity extends AppCompatActivity {
             }
         });
 
+        UserRanking1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), MyTreeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("useremail","shinjg97@gmail.com");
+//        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+        UserRanking2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), MyTreeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("useremail","test@test.test");
+//        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+        UserRanking3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), MyTreeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("useremail","test1@test1.test1");
+//        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
 
 
     }
