@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         EditText emailE = (EditText) findViewById(R.id.emailEditText);
-        String email = emailE.getText().toString(); //이메일
+        email = emailE.getText().toString(); //이메일
         EditText passwordE = (EditText) findViewById(R.id.passwordEditText);
         String password = passwordE.getText().toString(); //비밀번호
         EditText passwordCheckE = (EditText) findViewById(R.id.passwordCheckEditText);
@@ -102,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
     private  void startmemberInitActivity(){
         Intent intent=new Intent(this,memberInitActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("userEmail",email);
         startActivity(intent);
     }
 }

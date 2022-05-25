@@ -30,12 +30,20 @@ public class SearchActivity extends AppCompatActivity {
     // 검색어를 입력창
     private EditText editSearch;
 
-    // 게시글 띄우기
+    // view 띄우기
     private RecyclerView mRecyclerView;
+
+    // 게시글
     private PostAdaptor postAdaptor;
     private ArrayList<PostInfo> postInfo = new ArrayList<>();
     // 게시글 데이터를 넣을 리스트
     private ArrayList<PostInfo> postInfoInput = new ArrayList<>();
+
+    // 사용자
+    private UserAdaptor userAdaptor;
+    private ArrayList<UserInfo> userInfo = new ArrayList<>();
+    // 사용자 데이터 넣을 리스트
+    private ArrayList<UserInfo> userInfoInput = new ArrayList<>();
 
 
 
@@ -45,6 +53,7 @@ public class SearchActivity extends AppCompatActivity {
 
     // spinner 변경시 리스트 변경위해
     String[] search_types = {"게시글","사용자"};
+    int option = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +62,6 @@ public class SearchActivity extends AppCompatActivity {
 
         // xml 리스너 설정
         Spinner typeSpinner = (Spinner)findViewById(R.id.spinner_search_type);
-//        ArrayAdapter typeAdapter = ArrayAdapter.createFromResource(this,
-//                R.array.search_type, android.R.layout.simple_spinner_item);
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(
                 this,android.R.layout.simple_spinner_item,search_types
         );
@@ -80,22 +87,28 @@ public class SearchActivity extends AppCompatActivity {
             // input창에 문자를 입력할때마다 호출된다.
             @Override
             public void afterTextChanged(Editable editable) {
-                String text = editSearch.getText().toString();
-                search_post(text);
+                if(option == 0) {
+                    String text = editSearch.getText().toString();
+                    search_post(text);
+                }else if(option == 1){
+                    String text = editSearch.getText().toString();
+                    search_user(text);
+                }
             }
         });
 
         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getApplicationContext(),search_types[i],Toast.LENGTH_SHORT).show();
+                // 게시글 검색시
                 if(search_types[i].equals("게시글")){
-                    postInfo.clear();
-                    settingPostList();
-                }else if(search_types[i].equals("사용자")){
-                    postInfoInput.clear();
-                    postAdaptor = new PostAdaptor(getApplicationContext(), postInfoInput);
-                    mRecyclerView.setAdapter(postAdaptor);
+                   settingPostList();
+                   option = 0;
+                }
+                // 사용자 검색시
+                else if(search_types[i].equals("사용자")){
+                    settingUserList();
+                    option = 1;
                 }
             }
 
@@ -180,6 +193,60 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     // 여기서부터 사용자
+    private void settingUserList(){
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            userInfo = new ArrayList<>();
 
+                            for(QueryDocumentSnapshot document : task.getResult()) {
+                                userInfo.add(new UserInfo(
+                                        document.getData().get("name").toString(),
+                                        (document.getData().get("userEmail").toString())));
+                            }
+                            userAdaptor = new UserAdaptor(getApplicationContext(), userInfo);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            mRecyclerView.setAdapter(userAdaptor);
+                        }else{
+                            Log.e("Error", "task Error!");
+                        }
+
+                    }
+                });
+
+    }
+    // 검색을 수행하는 메소드
+    public void search_user(String charText) {
+
+        // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
+        userInfoInput.clear();
+
+
+        // 문자 입력이 없을때는 모든 데이터를 보여준다.
+        if (charText.length() == 0) {
+            settingUserList();
+        }
+        // 문자 입력 발생
+        else
+        {
+            // 리스트의 모든 데이터를 검색한다.
+            for(int i = 0;i < userInfo.size(); i++)
+            {
+                // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                if (userInfo.get(i).getUserName().toLowerCase().contains(charText))
+                {
+                    userInfoInput.add(userInfo.get(i));
+                }
+            }
+        }
+        // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
+        userAdaptor = new UserAdaptor(getApplicationContext(), userInfoInput);
+        mRecyclerView.setAdapter(userAdaptor);
+        userAdaptor.notifyDataSetChanged();
+
+    }
 
 }

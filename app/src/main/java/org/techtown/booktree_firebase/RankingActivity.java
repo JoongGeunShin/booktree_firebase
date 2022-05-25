@@ -34,6 +34,8 @@ public class RankingActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,5 +215,6 @@ public class RankingActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

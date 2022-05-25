@@ -21,11 +21,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class memberInitActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memeber_init);
+
+        findViewById(R.id.checkButton).setOnClickListener(onClickListener);
+
         if(user != null){
             for (UserInfo profile : user.getProviderData()) {
                 String name = profile.getDisplayName();
@@ -37,6 +41,8 @@ public class memberInitActivity extends AppCompatActivity {
                 }
             }
         }
+        Intent intent = new Intent();
+        userEmail = intent.getStringExtra("userEmail");
         Spinner genderSpinner = (Spinner)findViewById(R.id.spinner_gender);
         ArrayAdapter genderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.array_gender, android.R.layout.simple_spinner_item);
@@ -75,7 +81,7 @@ public class memberInitActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender,birthday);
+            MemberInfo memberInfo = new MemberInfo(name, phoneNumber,gender,birthday,user.getEmail());
 
             if (user != null) {
                 db.collection("users").document(user.getEmail()).set(memberInfo)

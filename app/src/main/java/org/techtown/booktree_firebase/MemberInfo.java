@@ -4,19 +4,15 @@ public class MemberInfo {
     private String name;
     private String phoneNumber;
     private String gender;
-    private String accountValue;
-    private String account;
     private String birthday;
-    private String address;
+    private String userEmail;
 
-    MemberInfo(String name, String phoneNumber, String gender, String birthday){
+    MemberInfo(String name, String phoneNumber, String gender, String birthday, String userEmail){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-        this.accountValue = accountValue;
-        this.account = account;
         this.birthday = birthday;
-        this.address = address;
+        this.userEmail = userEmail;
     }
 
     public String getName(){
@@ -40,25 +36,14 @@ public class MemberInfo {
         this.gender = gender;
     }
 
-    public String getAccountValue(){
-        return this.accountValue;
-    }
-    public void setAccountValue(String accountValue){
-        this.accountValue = accountValue;
-    }
-
-    public String getAccount(){
-        return this.account;
-    }
-    public void setAccount(String account){
-        this.account = account;
-    }
-
     public String getBirthday(){
         return this.birthday;
     }
     public void setBirthday(String birthday){
         this.birthday = birthday;
     }
+
+    public String getUserEmail() { return this.userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
 
 }
